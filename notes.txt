@@ -1,0 +1,50 @@
+API Documentation
+
+Be clear and concise - ensure the documentation is easy to read and understand. Use simple language, avoid jargon, and include examples.
+
+Provide detailed examples - include practical examples for each endpoint and data format to demonstrate how to use the API.
+
+Keep it up to date - make sure your documentation reflects the latest version of the API and remains accurate.
+
+Organize it well - structure the documentation logically, with clear sections and a table of contents for easy navigation.
+
+Offer support and feedback - if you're going to publish an API provide ways for developers to ask questions and give feedback. This can be as easy as pinning a 
+support email to the top of the documentation.
+
+Be mindful of indentations - everything should line up accordingly
+check out indent-rainbow in extensions marketplace
+
+Recycle format, change details, rinse and repeat
+
+Pluralization - paths, tags, parameters, responses, etc
+
+------------
+
+TDD => Test Driven Development
+
+write the tests before writing the code 
+
+helps improve code quality, speeds up development, and reduces bugs
+
+TDD Cycle = Red - Green - Refactor
+Red = write a test that fails, testing for functionality means the test should fail due to no implemented functionality
+Greed = write the simplest code that passes the test, discard any code that doesn't serve the purpose
+Refactor = improve the code, make it cleaner, more readable, and more efficient
+
+Unit Testing = test individual components in isolation to handle bugs
+ - the results of tests and the state of the application should not change the results of the test
+ 
+when refactoring code consider error handling, use try/except blocks to handle any potential errors
+
+adding try/except blocks will handle potential errors more gracefully but may add to run time
+
+------------
+
+using the testing config allows us to apply tests to our code without changing our existing data
+
+using sqlite database is good for testing creation and manipulation of data
+
+when testing a route consisting of only the url-prefix, must use a trailing "/" for instance "/members/"
+
+if 'python -m unittest discover tests' doesn't run the tests try 'python -m unittest discover -s app/tests'
+

@@ -1,0 +1,248 @@
+
+
+swagger: '2.0' # version type
+info:
+  title: "Library API" # name of API
+  description: "API to manage a library system" # description of API
+  version: "1.0.0" # version of API
+host: "127.0.0.1:5000" # URL where API can be accessed
+schemes:
+  - "http" # transfer protocol
+consumes:
+  - "application/json" # data type API expects to receive
+produces:
+  - "application/json" # data type API produces
+
+securityDefinitions:
+  bearerAuth: # name of security scheme
+    type: apiKey # scheme type
+    name: Authorization # name of security key
+    in: header # where key is found
+
+# define endpoints with supported HTTP methods and request/response formats (if left empty no paths have been defined yet)
+paths: 
+
+  /members/login: # name of path (endpoint)
+    post: # request type
+			tags: # category of endpoint
+				- Members
+      summary: "Login endpoint, (generates token)"
+      description: "Validates member credentials, generates and return a member specific token."
+      parameters: # what parameters are expected in the request
+        - in: "body" # data will be found in the request body
+          name: "body"
+          description: "Login Credentials" # description of the request data
+          required: true # indicated the parameters are request to process the request
+          schema: # referencing LoginCredentials definition from below
+            $ref: "#/definitions/LoginCredentials"
+      responses:
+        200:
+          description: "Login successful"
+          schema: # referencing LoginResponse definition from below
+            $ref: "#/definitions/LoginResponse" 
+          examples:
+            application/json:
+            token: "nvjdsnjngjjbsnjngsjnjsnbjvbsbjbgsj"
+            message: "Login successful"
+            status: "success"
+
+  /members: #endpoint
+    post: #Post request
+      tags:
+        - Members
+      summary: "Endpoint to create/register a new user."
+      description: "Endpoint to create a new member in our Library system, emails must be unique."
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Information required to create a new Member."
+          required: true
+          schema:
+            $ref: "#/definitions/CreateMemberPayload"
+      responses:
+        201:
+          descriptions: "Successfull Member Creation"
+          schema:
+            $ref: "#/definitions/CreateMemberResponse"
+          examples:
+            application/json:
+              id: 1
+              name: "John Doe"
+              DOB: "1900-01-01"
+              email: "johnd@email.com"
+              password: "password123"
+
+  /members:
+    get:
+      tags:
+        - Members
+      summary: "Returns all Members"
+      description: "Endpoint to retrieve a list of all members."
+      responses:
+        200:
+          description: "Retrieved Members Successfully"           
+          schema:
+            $ref: "#/definitions/AllMembers"   
+
+  /members:
+    put: 
+      tags:
+        - Members
+      summary: "Endpoint to update a user."
+      description: "Endpoint to update a member, this is a token authenticated route, and the user must be logged in to update their account."
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Information required to update a Member."
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateMemberPayload"
+      responses:
+        200:
+          descriptions: "Successfully Updated member"
+          schema:
+            $ref: "#/definitions/UpdateMemberResponse"
+          examples:
+            application/json:
+              id: 1
+              name: "Dohn Joe"
+              DOB: "1900-01-01"
+              email: "dohnj@email.com"
+              password: "password123" 
+
+  /members:
+    delete:
+      tags:
+        - Members
+      summary: "Enpoint to delete a member"
+      description: "Endpoint to delete a member. Requires token authentication, member must be logged in to delete their account"
+      security:
+       - bearerAuth: []
+      responses:
+        200:
+          description: "Successfully Deleted member"           
+          schema:
+            $ref: "#/definitions/DeleteMemberResponse"
+          examples:
+            application/json:
+              message: "successfully deleted user <member_id>."
+
+
+# define data structures used in API (request/response bodies)
+definitions: 
+
+  LoginCredentials: # name of request structured data model
+    type: "object" # data type
+    properties: # define expected properties
+      email: # property name
+        type: "string" # property data type
+      password:
+        type: "string"
+      
+    required: # specifying list of required properties
+      - email
+      - password
+    
+  LoginResponse: # name of structured response to Login request
+    type: "object" 
+    properties: 
+      token: # authentication token consisting of a string
+        type: "string"
+      message: # message to use indicating result as a string
+        type: "string"
+      status: # status display to user as a string
+        type: "string"
+
+
+  CreateMemberPayload:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      email:
+        type: "string"
+      DOB:
+        type: "string"
+				format: date
+      password:
+        type: "string"
+      
+    required:
+      - name
+      - email
+      - DOB
+      - password
+
+  CreateMemberResponse:
+    type: "object"
+    properties:
+      id:
+        type: "int"
+      name:
+        type: "string"
+      email:
+        type: "string"
+      DOB:
+        type: "string"
+      password:
+        type: "string"
+
+
+  AllMembers:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        email:
+          type: "string"
+        DOB:
+          type: "string"
+        password:
+          type: "string"
+
+
+  UpdateMemberPayload:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      email:
+        type: "string"
+      DOB:
+        type: "string"
+        format: "date"
+      password:
+        type: "string"
+      
+    required:
+      - name
+      - email
+      - DOB
+      - password
+
+  UpdateMemberResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      email:
+        type: "string"
+      DOB:
+        type: "string"
+      password:
+        type: "string"
+
+
+  DeleteMemberResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"  

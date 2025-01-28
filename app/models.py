@@ -95,7 +95,7 @@ class OrderItems(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     order_id: Mapped[int] = mapped_column(db.ForeignKey("orders.id"), nullable=False)
     item_id: Mapped[int] = mapped_column(db.ForeignKey("items.id"), nullable=False)
-    quantity: Mapped[int] = mapped_column(db.Int, nullable=False)
+    quantity: Mapped[int] = mapped_column(db.Integer, nullable=False)
 
     order: Mapped["Order"] = db.relationship(back_populates="order_items")
     item: Mapped["Item"] = db.relationship(back_populates="order_items")

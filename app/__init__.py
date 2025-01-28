@@ -8,8 +8,20 @@ from app.blueprints.members import members_bp
 from app.blueprints.books import books_bp
 from app.blueprints.loans import loan_bp
 from app.blueprints.items import items_bp
-from app.blueprints.items import orders_bp
+from app.blueprints.orders import orders_bp
+from flask_swagger_ui import get_swaggerui_blueprint
 
+
+SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
+API_URL = '/static/swagger.yaml'  # Our API URL (can of course be a local resource)
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Your API's Name"
+    }
+)
 
 # Create App Instance
 def create_app(config_name):
@@ -29,6 +41,7 @@ def create_app(config_name):
     app.register_blueprint(loan_bp, url_prefix='/loans')
     app.register_blueprint(items_bp, url_prefix='/items')
     app.register_blueprint(orders_bp, url_prefix='/oreders')
+    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL) #Registering our swagger blueprint
 
 
     return app

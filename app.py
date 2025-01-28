@@ -8,7 +8,7 @@ from app.models import db
 app = create_app('DevelopmentConfig') 
 
 with app.app_context():
-    db.drop_all() # Drops all tables in database (commented out for later use if needed)
+    # db.drop_all() # Drops all tables in database (commented out for later use if needed)
     db.create_all() # Creates all tables based on models
 
 # Run App
