@@ -41,7 +41,7 @@ def login():
 
         return jsonify(response), 200 # return successful user message to user display
     else:
-        return jsonify({"message": "invalid email or password"}) # if error diplay to user
+        return jsonify({"message": "invalid email or password"}), 400 # if error diplay to user
 
 
 # New Member
@@ -93,7 +93,7 @@ def update_member(member_id):
     
     # if no member return message to user
     if member == None:
-        return jsonify({"message": "invalid member id"})
+        return jsonify({"message": "invalid member id"}), 400
 
     # if member assign member data to variable
     try: 
@@ -116,6 +116,6 @@ def delete_member(member_id):
 
     db.session.delete(member) # execute query to delete member
     db.session.commit() # commit changes to database
-    return jsonify({"message": f"succesfully deleted user {member_id}"})
+    return jsonify({"message": f"succesfully deleted user {member_id}"}), 200
 
 
