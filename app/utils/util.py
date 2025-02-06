@@ -51,7 +51,7 @@ def token_required(f): # f represents the function we are wrapping
                 return jsonify({'message': 'invalid token'}), 400
             
             # return function to wrapper with member_id, args, and kwargs
-            return f(member_id, *args, **kwargs)
+            return f(*args, **kwargs)
         
         # if token not verified return message to user
         else:
