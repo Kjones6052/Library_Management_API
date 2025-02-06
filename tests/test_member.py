@@ -80,6 +80,7 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
         headers = {'Authorization': "Bearer " + self.test_login_member()}
 
         response = self.client.put('/members/1', json=update_payload, headers=headers)
+        print("\nPRINTING:\n", response.json)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['name'], 'Peter') 
         self.assertEqual(response.json['email'], 'test@email.com')
