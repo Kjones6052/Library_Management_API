@@ -17,7 +17,7 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
             db.create_all() # set up fresh tables for each test
             db.session.add(self.member)
             db.session.commit()
-        self.token = encode_token(1, 'admin')
+        self.token = encode_token(1)
         self.client = self.app.test_client() # create test client to simulate requests
 
     # positive create member test case
