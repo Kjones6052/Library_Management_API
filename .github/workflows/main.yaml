@@ -49,7 +49,7 @@ jobs:
 
     steps:
      - name: Checkout code
-      uses: actions/checout@v2
+      uses: actions/checkout@v2
 
      - name: Set up Python
       uses: actions/setup-python@v2
@@ -68,4 +68,4 @@ jobs:
 
     # will search for tests directory and run any file that starts with test_ and ends in .py
      - name: Run tests
-      run: python -m unittest discover - tests -p 'test_*.py'
+      run: python -m unittest discover -s tests -p 'test_*.py'
