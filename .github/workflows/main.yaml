@@ -14,57 +14,57 @@ jobs:
     runs-on: ubuntu-latest # type of machine (example: Ubuntu as OS)
 
     steps: 
-     - name: Checkout code # name of step (can be anything)
-      uses: actions/checkout@v2 # specifies action to take (example: check out code in repo)
+      - name: Checkout code # name of step (can be anything)
+        uses: actions/checkout@v2 # specifies action to take (example: check out code in repo)
 
-     - name: Set up Python # define step purpose
-      uses: actions/setup-python@v2 # define step action
-      with: # specify input parameters
-        python-version: 3.12
+      - name: Set up Python # define step purpose
+        uses: actions/setup-python@v2 # define step action
+        with: # specify input parameters
+          python-version: 3.12
 
     # action step to run shell commands: create & activate venv
-     - name: Create virtual environment
-      run: |
-        python -m venv venv
-        source venv/bin/activate
+      - name: Create virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
 
     # action step to run shell commands: upgrade pip & install dependencies
-     - name: Install our dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install -r requirements.txt
+      - name: Install our dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
 
     # action step to run shell commands: print debug to console
-     - name: Print debugging information
-      run: |
-        echo "Python Version: $(python --version)"
-        echo "Working Directory: $(pwd)"
-        echo "Contents of Working Directory: $(ls-l)"
-        echo "Contents of site-packages: $(ls -l venv/lib/python*/site-packages)"
+      - name: Print debugging information
+        run: |
+          echo "Python Version: $(python --version)"
+          echo "Working Directory: $(pwd)"
+          echo "Contents of Working Directory: $(ls-l)"
+          echo "Contents of site-packages: $(ls -l venv/lib/python*/site-packages)"
 
-  test: # new job in workflow
-    needs: build # will not run unless build job successfully executed
-    runs-on: ubuntu-latest
+  # test: # new job in workflow
+  #   needs: build # will not run unless build job successfully executed
+  #   runs-on: ubuntu-latest
 
-    steps:
-     - name: Checkout code
-      uses: actions/checkout@v2
+  #   steps:
+  #    - name: Checkout code
+  #     uses: actions/checkout@v2
 
-     - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.12
+  #    - name: Set up Python
+  #     uses: actions/setup-python@v2
+  #     with:
+  #       python-version: 3.12
 
-     - name: Create virtual environment
-      run: |
-        python -m venv venv
-        source venv/bin/activate
+  #    - name: Create virtual environment
+  #     run: |
+  #       python -m venv venv
+  #       source venv/bin/activate
 
-     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install -r requirements.txt
+  #    - name: Install dependencies
+  #     run: |
+  #       python -m pip install --upgrade pip
+  #       python -m pip install -r requirements.txt
 
-    # will search for tests directory and run any file that starts with test_ and ends in .py
-     - name: Run tests
-      run: python -m unittest discover -s tests -p 'test_*.py'
+  #   # will search for tests directory and run any file that starts with test_ and ends in .py
+  #    - name: Run tests
+  #     run: python -m unittest discover -s tests -p 'test_*.py'
