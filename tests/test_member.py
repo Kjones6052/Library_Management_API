@@ -37,7 +37,7 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
     def test_invalid_creation(self):
         member_payload = {
             "name": "John Doe",
-            "phone": "123-456-7890",
+            "DOB": "1900-01-01",
             "password": "123"       
         }
 
@@ -72,9 +72,9 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
     def test_update_member(self):
         update_payload = {
             "name": "Peter",
-            "phone": "",
-            "email": "",
-            "password": ""
+            "phone": "9998887777",
+            "email": "test@email.com",
+            "password": "test"
         }
 
         headers = {'Authorization': "Bearer " + self.test_login_member()}
