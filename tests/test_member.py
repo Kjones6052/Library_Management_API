@@ -66,7 +66,7 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
 
         response = self.client.post('/members/login', json=credentials)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['message'], 'invalid email or password!')
+        self.assertEqual(response.json['message'], 'invalid email or password')
 
     # positive update member test case
     def test_update_member(self):
