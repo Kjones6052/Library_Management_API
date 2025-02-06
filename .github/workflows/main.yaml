@@ -13,7 +13,6 @@ jobs:
   build: # name of job (can be anything)
     runs-on: ubuntu-latest # type of machine (example: Ubuntu as OS)
 
-    # list of steps job will take
     steps: 
      - name: Checkout code # name of step (can be anything)
       uses: actions/checkout@v2 # specifies action to take (example: check out code in repo)
@@ -30,7 +29,7 @@ jobs:
         source venv/bin/activate
 
     # action step to run shell commands: upgrade pip & install dependencies
-     - name: Install dependencies
+     - name: Install our dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
