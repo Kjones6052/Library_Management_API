@@ -48,3 +48,43 @@ when testing a route consisting of only the url-prefix, must use a trailing "/" 
 
 if 'python -m unittest discover tests' doesn't run the tests try 'python -m unittest discover -s app/tests'
 
+------------
+
+DevOps => combining software development with information technology operations
+
+CI/CD 
+
+CI => Continuous Integration: updating repo frequenty to work more efficiently with others
+
+write code => upload to repo => build => test => repeat
+
+CD => Continuous Deployment: deploying changes to production after passing automated tests
+
+build => test => deploy approval => deploy => repeat
+
+Key Points:
+- Daily Commits: multiple commits a day to keep code up to date for more efficient debugging
+- Build Previous Mainline Commit: pull latest changes from the repo and build on top to maintain the latest version
+- Unique Source: builds should be triggered by events to avoid unnecessary builds
+- Builds Fast & Automated: allows feedback on changes and reduces time to deliver new features
+- Builds Test: automated testing to verify code correctness ensures high quality code is deployed
+- Correct Builds Faster: identify issues and correct them asap to ensure codebase is always deployable
+- Test Clone Production Env: testing environment should closely resemble the production environment to aid in issues being discovered
+- Visibility of CI: all team members should see status of pipeline to ensure high code quality
+- Automate Deployment: once code changes pass predefined autotesting they should auto deploy into production to ensure production is always up to date
+- Get Last Executable: pipeline should produce a deployable artifact to ensure code changes are packaged for deployment
+
+GitHub Actions
+
+- Automates Testing: trigger testing when code changes are pushed to repo to catch issues before code is merged into mainbase
+- Build: automating the build process ensures the application compiles successfully and build process is not corrupted
+- Deployment: automate deployment with GitHub triggers for various environments
+- Code Reviews: automate code reviews lik enforcing coding standards or running linters on pulll requests
+- Release Management: automate the creation of releases, release nootes, and packing and publishing the software
+- Integration Features: see GitHub for details
+
+GitHub Actions uses a YAML syntax to define the workflows and is very flexible. You can create workflows that respond to a variety of GitHub events such as push, 
+pull requests, issue creation, and more. You can also reuse and share actions created by the GitHub community.
+
+------------
+
