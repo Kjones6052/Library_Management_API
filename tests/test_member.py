@@ -72,8 +72,8 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
     def test_update_member(self):
         update_payload = {
             "name": "Peter",
-            "phone": "9998887777",
             "email": "test@email.com",
+            "DOB": "1900-01-01",
             "password": "test"
         }
 
