@@ -55,7 +55,7 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
         response = self.client.post('/members/login', json=credentials)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['status'], 'success')
-        print("\nPRINTING:\n",response.json['token'])
+        print("\nPRINTING:\n",response.json)
         return response.json['token']
     
     # nagative member login test case
