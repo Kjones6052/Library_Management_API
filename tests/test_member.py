@@ -5,6 +5,7 @@ from app import create_app # import function to create instance of flask app
 from app.models import db, Member # import db to manage database, member to create app instance with a member
 import unittest # import unittest to set up and run test cases
 from datetime import datetime # import datetime for test user
+from app.utils.util import encode_token
 
 # create member test cases
 class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
