@@ -6,6 +6,7 @@ from app.models import db, Member # import db to manage database, member to crea
 import unittest # import unittest to set up and run test cases
 from datetime import datetime # import datetime for test user
 from app.utils.util import encode_token
+import jwt
 
 # create member test cases
 class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
@@ -81,7 +82,7 @@ class TestMember(unittest.TestCase): # inheriting from unittest.TestCase
         headers = {'Authorization': "Bearer " + self.test_login_member()}
 
         response = self.client.put('/members/1', json=update_payload, headers=headers)
-        print("\nPRINTING:\n", response.json)
+        print("\nPRINTING:\n", response.json['token'])
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['name'], 'Peter') 
         self.assertEqual(response.json['email'], 'test@email.com')
